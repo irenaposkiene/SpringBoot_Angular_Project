@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 //methods which will be requested from angular client
@@ -22,12 +23,16 @@ public class TodoController {
     public List<Todo> getTodos(){
         return (List<Todo>) todoRepository.findAll();
     }
-    /*
+
     @GetMapping("/todo/{id}")
-    public Todo getTodo(@PathVariable Long id){
-        return todoRepository.findOne(id);
+    public Optional<Todo> getTodo(@PathVariable Long id){
+        return todoRepository.findById(id);
     }
-    */
+    @PostMapping("/todo")
+    public Todo addTodo(@RequestBody Todo todo){
+        return todoRepository.save(todo);
+    }
+
     /*
     @DeleteMapping("/todo/{id}")
         public boolean deleteTodo(@PathVariable Long id){
@@ -36,12 +41,12 @@ public class TodoController {
         }
      */
     @PostMapping("/todo")
-    public Todo createTodo(Todo todo){
+    public Todo createTodo(@RequestBody Todo todo){
         return todoRepository.save(todo);
     }
 
     @PutMapping("/todo")
-    public Todo updateTodo(Todo todo){
+    public Todo updateTodo(@RequestBody Todo todo){
         return todoRepository.save(todo);
     }
 }
