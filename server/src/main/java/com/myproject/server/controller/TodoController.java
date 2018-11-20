@@ -28,18 +28,8 @@ public class TodoController {
     public Optional<Todo> getTodo(@PathVariable Long id){
         return todoRepository.findById(id);
     }
-    @PostMapping("/todo")
-    public Todo addTodo(@RequestBody Todo todo){
-        return todoRepository.save(todo);
-    }
 
-    /*
-    @DeleteMapping("/todo/{id}")
-        public boolean deleteTodo(@PathVariable Long id){
-            todoRepository.delete(id);
-            return true;
-        }
-     */
+
     @PostMapping("/todo")
     public Todo createTodo(@RequestBody Todo todo){
         return todoRepository.save(todo);
@@ -49,5 +39,19 @@ public class TodoController {
     public Todo updateTodo(@RequestBody Todo todo){
         return todoRepository.save(todo);
     }
+
+    @GetMapping("/oldtodos/{done}")
+    public Todo findByDone(List<Todo> todos, Boolean done) {
+
+        for (Todo todo : todos) {
+            if (todo.getDone()== Boolean.TRUE) {
+                return todo;
+            }
+        }
+        return null;
+
+    }
+
+
 }
 

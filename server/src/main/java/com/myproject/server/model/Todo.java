@@ -14,9 +14,13 @@ public class Todo {
     @GeneratedValue
     private long id;
     private String value;
+    private Boolean done = Boolean.FALSE;
+
+
 
     public Todo() {
     }
+
 
     public Todo(String value) {
         this.value = value;
@@ -36,5 +40,12 @@ public class Todo {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
+    }
+    public Boolean getDone() {
+        return done;
     }
 }
